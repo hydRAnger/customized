@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>ANI</title>
+  <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <nav>
+    <div class="cdc_icdc">
+      <div class="cdc_icdc_top">
+        <a href="/">
+          <div class="cdc_icdc_top_logo">
+          </div>
+        </a>
+        <div class="cdc_logo_font">
+          <span>微生物基因组遗传差异分析平台</span>
+          <p>ICDC,China CDC</p>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <section class="cdc_main">
+    <div class="cdc_left">
+      <h4>
+        Description
+      </h4>
+      <p>ANItools is a software package written by PERL scripts that can be run in a Linux/Unix system. If you want to compare bacterial genomes and calculate their average nucleotide identity (ANI), you could download and run this program directly. Or you
+        could send us the genome sequence by email. Then we will do the analysis work for you.</p>
+      <h4>
+        Downloads
+      </h4>
+      <p>Download the latest version of the program <a href="/download/ANI.tar.gz">here</a>.</p>
+      <h4>
+        Manual
+      </h4>
+      <p>
+        The most current Web version of the manual is available <a href="/docs/ANItools_Help.pdf">here</a>.
+        <br>
+        The most current Linux version of the manual is available <a href="/docs/ANI.pdf">here</a>.
+      </p>
+      <h4>
+        Citation
+      </h4>
+      <p>
+        If you use the ANItools, please cite the following papers:
+        <br>
+        Wen Z, Pengcheng D, Han Z, et al. Whole-genome sequence comparison as a method for improving bacterial species definition.[J]. Journal of General & Applied Microbiology, 2014, 60(2):75-78.
+      </p>
+      <h4>
+        History
+      </h4>
+      <p>
+        ANItools version 2.0 was released in December 2015.
+        <br>
+        ANItools version 1.0 was firstly released in December 2011.
+      </p>
+      <h4>
+        FAQ
+      </h4>
+      <p>
+        Q: Could I use this program under Windows system?
+        <br>
+        A: No. This version of ANItools only works under Linux/Unix system.
+      </p>
+      <p>
+        Q: How man strains used in the current database and what are they?
+        <br>
+        A: 2773 strains, 1487 species and 668 genera are covered in this version, which are all complete sequences downloaded from the NCBI ftp. The list of strain and their corresponding ID is available <a href="/docs/all_bac.list">here</a>.
+      </p>
+      <p>
+        Q: How could I get the ANI value between two strains both listed in the list?
+        <br>
+        A: The precomputed ANI values of all strains listed in the list is available <a href="/docs/ANI_matrix.zip">here</a>.
+      </p>
+    </div>
+    <div class="cdc_right">
+      <h4>ANItools Online <a class="ani-help-btn" href="/docs/ANItools_Help.pdf"><span class="glyphicon glyphicon-question-sign"></span> Help</a></h4>
+      <div class="form-horizontal">
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Your E-mail：</label>
+          <div class="col-sm-9 col-xs-4">
+            <input type="email" class="form-control" placeholder="Please enter the email..." aria-describedby="sizing-addon2">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputPassword" class="col-sm-3 control-label">Taxonomy：</label>
+          <div class="col-sm-9 col-xs-4">
+            <div id="taxonomy_select" style="display: flex;">
+              <select class="genus form-control">
+                <option value="-1">Please select</option>
+              </select>
+              <select class="species form-control">
+                <option value="-1">Please select</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Tags：</label>
+          <div class="col-sm-8 col-xs-4">
+            <input type="text" id="tags" class="form-control" value="" placeholder="Please enter the Tags..." aria-describedby="sizing-addon2">
+          </div>
+          <div class="col-sm-1 icdc_question">
+            <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="The Name of the query sequence, which will be shown in report page"></span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Fasta：</label>
+          <div class="col-sm-8 col-xs-4">
+            <div class="upload_panel">
+              <form role="form" id="cdcForm" method="POST" onsubmit="return cdcForm();" enctype="multipart/form-data">
+                <input type="text" value="" id="cdc_filetoken_input" name="cdc_filetoken_input" style="display:none">
+                <input type="file" id="inputFile" name="inputFile" style="display:none" onchange="inputUploadFile(this)" />
+                <input type="text" readonly="readonly" value="" id="inputFileAgent" class="form-control" />
+                <input type="button" class="btn btn-default" onclick="document.getElementById('inputFile').click()" value="Browse..." />
+                <button type="submit" class="btn btn-default" id="upload_btn">Upload</button>
+                <p class="help-block">（File size can not exceed 10MB）</p>
+                <p id="upload_p"></p>
+              </form>
+            </div>
+          </div>
+          <div class="col-sm-1 icdc_question">
+            <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="Query CDS File"></span>
+          </div>
+        </div>
+      </div>
+      <div class="cdc_running_div">
+        <table>
+          <tr>
+            <td style="padding-right:10px;">
+              <button type="button" class="btn cdc_running btn-primary" id="cdc_running" data-loading-text="Running...">RUN ANItools</button>
+            </td>
+            <td>
+              <button type="button" class="btn btn-link" id="cdc_testRun">Test Run ANItools</button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="cdc_right_buttom">
+        Powered by
+        <a href="https://genedock.com">
+          <span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+  <!-- script -->
+  <script src="lib/jquery/dist/jquery.min.js" charset="utf-8"></script>
+  <script src="lib/bootstrap/dist/js/bootstrap.min.js" charset="utf-8"></script>
+  <script src="lib/jquery-form/jquery.form.js" charset="utf-8"></script>
+  <script src="prd/bundle.js"></script>
+  <script type="text/javascript" src="js/genedock-sdk.js"></script>
+  <script type="text/javascript" src="js/genedock-utils.js"></script>
+  <script type="text/javascript" src="js/genedock-cdc.js"></script>
+  <script>
+    $(function() {
+      Parameter();
+      $('[data-toggle="tooltip"]').tooltip();
+      $('#cdc_running,#upload_btn').attr('disabled', 'disabled');
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>ANI</title>
+  <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style type="text/css">
+    #loglocation {
+      float: left;
+      padding: 4px 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="loading_bg"></div>
+  <div id="loading">
+    <img src="img/loading.gif" id="loading_gif">
+    <p>loading...</p>
+  </div>
+  <nav>
+    <div class="cdc_icdc">
+      <div class="cdc_icdc_top">
+        <a href="/">
+          <div class="cdc_icdc_top_logo">
+          </div>
+        </a>
+        <div class="cdc_logo_font">
+          <span>微生物基因组遗传差异分析平台</span>
+          <p>ICDC,China CDC</p>
+        </div>
+        <div class="cdc_back" style="display:none;">
+          <a href="/">Home</a>
+          <a id="parameter_display">Parameters</a>
+          <a id="log_display">Logs</a>
+          <a id="report_display">Report</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <section class="cdc_main">
+    <div class="clearfix">
+      <div class="pull-right">
+        <input type="checkbox" id="checkbox_page" checked/>
+        <label class="g_smcc_btn" for="checkbox_page" data-toggle="tooltip" data-placement="bottom" title="Auto refresh(15s)"></label>
+        <button type="button" id="taskdetail_refresh" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="刷新">
+          <span class="glyphicon glyphicon-refresh"></span>
+        </button>
+      </div>
+    </div>
+    <div id="log">
+      <div class="job_log well">
+        <p>App Name</p>
+        <p>Start Time</p>
+        <p>End Time</p>
+        <p>State</p>
+      </div>
+      <div class='panel-group' id='accordion'></div>
+    </div>
+  </section>
+  <!-- script -->
+  <script src="lib/jquery/dist/jquery.min.js" charset="utf-8"></script>
+  <script src="lib/bootstrap/dist/js/bootstrap.min.js" charset="utf-8"></script>
+  <script src="lib/jquery-form/jquery.form.js" charset="utf-8"></script>
+  <script type="text/javascript" src="js/genedock-sdk.js"></script>
+  <script type="text/javascript" src="js/genedock-utils.js"></script>
+  <script type="text/javascript" src="js/genedock-cdc.js"></script>
+  <script type="text/javascript">
+    var urlHref = window.location.href.split("?")[1];
+    urlHref = urlHref.substr(0, urlHref.indexOf('/'));
+    Workflow_id = taskId = urlHref;
+
+    $(function() {
+      getLog_id(taskId, function(res) {
+        $("#accordion").append(res);
+        temp();
+      });
+      refresh();
+      taskstatus_fn();
+    });
+    //自动刷新,刷新间隔15秒
+    function refresh() {
+      if ($('#checkbox_page').is(':checked')) {
+        reset_checkbox = setInterval(function() {
+          resetlist();
+        }, 15000);
+      } else {
+        clearInterval(reset_checkbox);
+      }
+    }
+    // 刷新列表
+    function resetlist() {
+      $("#accordion").empty("");
+      getLog_id(taskId, function(res) {
+        $("#accordion").append(res);
+        temp();
+      });
+    }
+    $("#taskdetail_refresh").click(resetlist);
+    $('#checkbox_page').click(refresh);
+    // 定时每秒查询任务状态
+    function taskstatus_fn() {
+      var taskstatus = setInterval(function() {
+        genedock.get_task(taskId, function(data) {
+          if (data.data.status === "success") {
+            $(".cdc_back").css({
+              "display": "block"
+            });
+            clearInterval(taskstatus);
+            $("#report_display").attr("href", "report.html?" + Workflow_id + "/");
+            $("#parameter_display").attr("href", "parameter.html?" + Workflow_id + "/");
+            $("#log_display").attr("href", "log.html?" + Workflow_id + "/");
+          }
+        }, function(err) {
+          console.log(err);
+        });
+      }, 1000);
+    }
+  </script>
+</body>
+
+</html>
