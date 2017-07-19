@@ -10748,17 +10748,17 @@ $('#cdc_running').click(function() {
       PlanRequest.name = name;
       PlanRequest.description = taskName;
       // update Inputs object
-      PlanRequest.Inputs['randomcode0_loaddata'].data[0].enid = uploadfile.enid;
-      PlanRequest.Inputs['randomcode0_loaddata'].data[0].name = 'chinacdc:/' + uploadfile.name;
+      PlanRequest.Inputs['loaddata_node1'].data[0].enid = uploadfile.enid;
+      PlanRequest.Inputs['loaddata_node1'].data[0].name = 'chinacdc:/' + uploadfile.name;
       var genusVal = $('.genus').val();
       var speciesVal = $('.species').val();
       var tagsVal = $('#tags').val();
       if (genusVal != -1 && speciesVal != -1) {
         if (tagsVal) {
-          PlanRequest.Inputs['randomcode1_loaddata'].data = [];
+          PlanRequest.Inputs['loaddata_node2'].data = [];
           if (speciesVal == 'all') {
             for (var i = 0; i < genus[genusVal].species.length; i++) {
-              PlanRequest.Inputs['randomcode1_loaddata'].data.push({
+              PlanRequest.Inputs['loaddata_node2'].data.push({
                 enid: genus[genusVal].species[i].enid,
                 name: genus[genusVal].species[i].path,
                 property: {
@@ -10771,7 +10771,7 @@ $('#cdc_running').click(function() {
               });
             }
           } else {
-            PlanRequest.Inputs['randomcode1_loaddata'].data.push({
+            PlanRequest.Inputs['loaddata_node2'].data.push({
               enid: genus[genusVal].species[speciesVal].enid,
               name: genus[genusVal].species[speciesVal].path,
               property: {
@@ -10836,10 +10836,10 @@ $('#cdc_testRun').click(function() {
     PlanRequest.name = name;
     PlanRequest.description = taskName;
     // update Inputs object
-    PlanRequest.Inputs['randomcode0_loaddata'].data[0].enid = '58aa9d55f1e3f400598ef1b7';
-    PlanRequest.Inputs['randomcode0_loaddata'].data[0].name = 'chinacdc:/S9.gbk.seq.fasta';
-    PlanRequest.Inputs['randomcode1_loaddata'].data[0].enid = '57bb950ef1e3f40042fe0f62';
-    PlanRequest.Inputs['randomcode1_loaddata'].data[0].name = 'chinacdc:/ANI/Streptococcus/Streptococcus_suis.tgz';
+    PlanRequest.Inputs['loaddata_node1'].data[0].enid = '58aa9d55f1e3f400598ef1b7';
+    PlanRequest.Inputs['loaddata_node1'].data[0].name = 'chinacdc:/S9.gbk.seq.fasta';
+    PlanRequest.Inputs['loaddata_node2'].data[0].enid = '57bb950ef1e3f40042fe0f62';
+    PlanRequest.Inputs['loaddata_node2'].data[0].name = 'chinacdc:/ANI/Streptococcus/Streptococcus_suis.tgz';
     // update Outputs object
     $.each(PlanRequest.Outputs, function(outputKey, outputVal) {
       for (var i = 0; i < PlanRequest.Outputs[outputKey].data.length; i++) {
