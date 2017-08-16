@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>ANI</title>
+  <title>16sPIP</title>
   <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -28,57 +28,48 @@
       <h4>
         Description
       </h4>
-      <p>ANItools is a software package written by PERL scripts that can be run in a Linux/Unix system. If you want to compare bacterial genomes and calculate their average nucleotide identity (ANI), you could download and run this program directly. Or you
-        could send us the genome sequence by email. Then we will do the analysis work for you.</p>
+      <p>
+      16sPIP is an integrative application that consists of a series of Perl, Python, and shell scripts that can be run in a Linux/Unix system. If you want to quickly detect pathogens in clinical samples based on 16S metagenomic sequencing, you could download and run this program directly. Or you could send us the raw data by email. Then we will do the analysis work for you. But this software and results could not be allowed to be used in any commercial work.
+      </p>
       <h4>
         Downloads
       </h4>
-      <p>Download the latest version of the program <a href="/download/ANI.tar.gz">here</a>.</p>
+      <p>Download the latest version of the program <a href="https://github.com/jjmiao1314/16sPIP.git">here</a>.</p>
       <h4>
         Manual
       </h4>
       <p>
-        The most current Web version of the manual is available <a href="/docs/ANItools_Help.pdf">here</a>.
-        <br>
-        The most current Linux version of the manual is available <a href="/docs/ANI.pdf">here</a>.
+        The most current Linux version of the manual is available <a href="/docs/Manual-16sPIP.pdf">here</a>.
       </p>
       <h4>
         Citation
       </h4>
       <p>
-        If you use the ANItools, please cite the following papers:
+        If you use the 16sPIP, please cite the following papers:
         <br>
-        Wen Z, Pengcheng D, Han Z, et al. Whole-genome sequence comparison as a method for improving bacterial species definition.[J]. Journal of General & Applied Microbiology, 2014, 60(2):75-78.
-      </p>
-      <h4>
-        History
-      </h4>
-      <p>
-        ANItools version 2.0 was released in December 2015.
-        <br>
-        ANItools version 1.0 was firstly released in December 2011.
+        16sPIP: A Comprehensive Analysis Pipeline for Rapid Pathogen Detection in Clinical Samples Based on 16S Metagenomic Sequencing. BMC Bioinformatics, 2017
       </p>
       <h4>
         FAQ
       </h4>
       <p>
-        Q: Could I use this program under Windows system?
+        Q: Could I use this program under Windows system? 
         <br>
-        A: No. This version of ANItools only works under Linux/Unix system.
+        A: No. This version of 16sPIP only works under Linux/Unix system.
       </p>
       <p>
-        Q: How man strains used in the current database and what are they?
+        Q: How many kinds of bacteria are currently covered by the database?
         <br>
-        A: 2773 strains, 1487 species and 668 genera are covered in this version, which are all complete sequences downloaded from the NCBI ftp. The list of strain and their corresponding ID is available <a href="/docs/all_bac.list">here</a>.
+        A: 252,567 reads were used as the 16S full-length bacterial reference database in 16sPIP, covering 15,217 species and 2,094 genera. 16S pathogen database was constructed from 29,258 total reads covering 346 bacterial species of human health concern in “The Directory of Pathogenic Microorganisms in Human Infections” published by the Ministry of Health of the People’s Republic of China.
       </p>
       <p>
-        Q: How could I get the ANI value between two strains both listed in the list?
+        Q: The pipeline provides two different working modes. How to choose an appropriate one when handing a sample?
         <br>
-        A: The precomputed ANI values of all strains listed in the list is available <a href="/docs/ANI_matrix.zip">here</a>.
+        A: Users could choose the fast mode of 16SPIP to quickly identify the existence of 346 pathogen bacterial species in their samples, which are directly related with human health. If users want to identity the existence of other species as well as to study the population diversity of microbiome, the sensitive mode is the better choice.
       </p>
     </div>
     <div class="cdc_right">
-      <h4>ANItools Online <a class="ani-help-btn" href="/docs/ANItools_Help.pdf"><span class="glyphicon glyphicon-question-sign"></span> Help</a></h4>
+      <h4>16sPIP Online <a class="ani-help-btn" href="/docs/Manual-16sPIP.pdf"><span class="glyphicon glyphicon-question-sign"></span> Help</a></h4>
       <div class="form-horizontal">
         <div class="form-group">
           <label class="col-sm-3 control-label">Your E-mail：</label>
@@ -132,10 +123,10 @@
         <table>
           <tr>
             <td style="padding-right:10px;">
-              <button type="button" class="btn cdc_running btn-primary" id="cdc_running" data-loading-text="Running...">RUN ANItools</button>
+              <button type="button" class="btn cdc_running btn-primary" id="cdc_running" data-loading-text="Running...">RUN 16sPIP</button>
             </td>
             <td>
-              <button type="button" class="btn btn-link" id="cdc_testRun">Test Run ANItools</button>
+              <button type="button" class="btn btn-link" id="cdc_testRun">Test Run 16sPIP</button>
             </td>
           </tr>
         </table>
