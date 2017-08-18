@@ -243,7 +243,7 @@ function forwardUploadFile(forwardFastaForm) {
 
 function reverseUploadFile(reverseFastaForm) {
   //英文版的value覆盖原版
-  document.getElementById("forwardFileAgent").value = document.getElementById("inputForwardFile").value;
+  document.getElementById("reverseFileAgent").value = document.getElementById("inputReverseFile").value;
   //判断文件大小
   var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
   var fileSize = 0,
@@ -261,7 +261,7 @@ function reverseUploadFile(reverseFastaForm) {
   if (size > 100000) {
     var cdc_fileSize = size / 1024;
     uploadReverseP(red, "The file size is " + cdc_fileSize.toFixed(2) + "MB，File size cannot exceed 100MB");
-    $("#cdc_running,#upload_reverse_btn").attr("disabled", "disabled");
+    $("#upload_reverse_btn").attr("disabled", "disabled");
   } else {
     //判断类型
     if (cdc_fileName.lastIndexOf(".") != -1) {
@@ -274,15 +274,15 @@ function reverseUploadFile(reverseFastaForm) {
           $('#upload_reverse_btn').removeAttr("disabled");
           return true;
         } else {
-          $("#cdc_running,#upload_reverse_btn").attr("disabled", "disabled");
+          $("#upload_reverse_btn").attr("disabled", "disabled");
           continue;
         }
       }
-      $("#cdc_running,#upload_reverse_btn").attr("disabled", "disabled");
+      $("#upload_reverse_btn").attr("disabled", "disabled");
       uploadReverseP(red, "Don't support the suffix for ." + cdc_fileType + " File upload,Only support (.fasta, .fa)");
       return false;
     } else {
-      $("#cdc_running,#upload_reverse_btn").attr("disabled", "disabled");
+      $("#upload_reverse_btn").attr("disabled", "disabled");
       uploadReverseP(red, "Don't support the suffix for ." + cdc_fileType + " File upload,Only support (.fasta, .fa)");
     }
   }
@@ -408,7 +408,6 @@ function reverseFastaForm() {
                           if (files[i].name == filename) {
                             uploadReverseFile.enid = files[i].entity_id;
                             uploadReverseFile.name = files[i].name;
-                            $('#cdc_running').removeAttr('disabled');
                             uploadReverseP(green, 'Uploaded successfully, please run...');
                             testbtn = false;
                           }
