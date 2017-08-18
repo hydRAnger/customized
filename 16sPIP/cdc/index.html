@@ -78,44 +78,68 @@
           </div>
         </div>
         <div class="form-group">
-          <label for="inputPassword" class="col-sm-3 control-label">Taxonomy：</label>
-          <div class="col-sm-9 col-xs-4">
-            <div id="taxonomy_select" style="display: flex;">
-              <select class="genus form-control">
-                <option value="-1">Please select</option>
-              </select>
-              <select class="species form-control">
-                <option value="-1">Please select</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-3 control-label">Tags：</label>
-          <div class="col-sm-8 col-xs-4">
-            <input type="text" id="tags" class="form-control" value="" placeholder="Please enter the Tags..." aria-describedby="sizing-addon2">
-          </div>
-          <div class="col-sm-1 icdc_question">
-            <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="The Name of the query sequence, which will be shown in report page"></span>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-3 control-label">Fasta：</label>
+          <label class="col-sm-3 control-label">forward Fasta：</label>
           <div class="col-sm-8 col-xs-4">
             <div class="upload_panel">
-              <form role="form" id="cdcForm" method="POST" onsubmit="return cdcForm();" enctype="multipart/form-data">
-                <input type="text" value="" id="cdc_filetoken_input" name="cdc_filetoken_input" style="display:none">
-                <input type="file" id="inputFile" name="inputFile" style="display:none" onchange="inputUploadFile(this)" />
-                <input type="text" readonly="readonly" value="" id="inputFileAgent" class="form-control" />
-                <input type="button" class="btn btn-default" onclick="document.getElementById('inputFile').click()" value="Browse..." />
-                <button type="submit" class="btn btn-default" id="upload_btn">Upload</button>
-                <p class="help-block">（File size can not exceed 10MB）</p>
-                <p id="upload_p"></p>
+              <form role="form" id="forwardFastaForm" method="POST" onsubmit="return forwardFastaForm();" enctype="multipart/form-data">
+                <!--input type="text" value="" id="cdc_filetoken_input" name="cdc_filetoken_input" style="display:none"-->
+                <input type="file" id="inputForwardFile" name="inputForwardFile" style="display:none" onchange="forwardUploadFile(this)" />
+                <input type="text" readonly="readonly" value="" id="forwardFileAgent" class="inputFileAgent form-control" />
+                <input type="button" class="btn btn-default" onclick="document.getElementById('inputForwardFile').click()" value="Browse..." />
+                <button type="submit" class="btn btn-default" id="upload_forward_btn">Upload</button>
+                <p class="help-block">（File size can not exceed 100MB）</p>
+                <p id="upload_forward_p"></p>
               </form>
             </div>
           </div>
           <div class="col-sm-1 icdc_question">
-            <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="Query CDS File"></span>
+            <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="Query Formard File"></span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">reverse Fasta：</label>
+          <div class="col-sm-8 col-xs-4">
+            <div class="upload_panel">
+              <form role="form" id="reverseFastaForm" method="POST" onsubmit="return reverseFastaForm();" enctype="multipart/form-data">
+                <input type="text" value="" id="cdc_filetoken_input" name="cdc_filetoken_input" style="display:none">
+                <input type="file" id="inputReverseFile" name="inputReverseFile" style="display:none" onchange="reverseUploadFile(this)" />
+                <input type="text" readonly="readonly" value="" id="reverseFileAgent" class="inputFileAgent form-control" />
+                <input type="button" class="btn btn-default" onclick="document.getElementById('inputReverseFile').click()" value="Browse..." />
+                <button type="submit" class="btn btn-default" id="upload_reverse_btn">Upload</button>
+                <p class="help-block">（File size can not exceed 100MB）</p>
+                <p id="upload_reverse_p"></p>
+              </form>
+            </div>
+          </div>
+          <div class="col-sm-1 icdc_question">
+            <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="Query Reverse File"></span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Mode：</label>
+          <div class="col-sm-8 col-xs-4" style="padding-top: 7px;">
+            <input type="radio" id="modeFast" name="mode" value="fast" checked>
+            <label for="modeFast" style="margin-right: 50px">fast</label>
+            <input type="radio" id="modeSensitive" name="mode" value="sensitive">
+            <label for="modeSensitive">sensitive</label>
+          </div>
+          <div class="col-sm-1 icdc_question">
+            <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="Analysis mode：fast or sensitive"></span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Format：</label>
+          <div class="col-sm-8 col-xs-4">
+            <select id="select_format" class="genus form-control">
+              <option value="fastq">fastq</option>
+              <option value="fasta">fasta</option>
+              <option value="sam">sam</option>
+              <option value="bam">bam</option>
+              <option value="sff">sff</option>
+            </select>
+          </div>
+          <div class="col-sm-1 icdc_question">
+            <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="NGS data format : fastq or fasta or sam or bam or sff"></span>
           </div>
         </div>
       </div>
@@ -149,9 +173,9 @@
   <script type="text/javascript" src="js/genedock-cdc.js"></script>
   <script>
     $(function() {
-      Parameter();
       $('[data-toggle="tooltip"]').tooltip();
-      $('#cdc_running,#upload_btn').attr('disabled', 'disabled');
+      $('#cdc_running,#upload_forward_btn').attr('disabled', 'disabled');
+      $('#cdc_running,#upload_reverse_btn').attr('disabled', 'disabled');
     });
   </script>
 </body>

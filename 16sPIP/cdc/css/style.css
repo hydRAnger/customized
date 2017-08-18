@@ -1861,7 +1861,7 @@ span.glyphicon.glyphicon-qrcode.qrcode {
     .cdc_right div.form-horizontal {
       margin-top: 40px;
     }
-    .cdc_right input#inputFileAgent {
+    .cdc_right input.inputFileAgent {
       margin-bottom: 20px;
       margin-top: -20px;
     }
