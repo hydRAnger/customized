@@ -48,7 +48,7 @@ $('#cdc_running').click(function() {
       PlanRequest.description = taskName;
       // update Inputs object
       PlanRequest.Inputs['loaddata_node1'].data[0].enid = uploadReverseFile.enid || '';
-      PlanRequest.Inputs['loaddata_node1'].data[0].name = uploadReverseFile.name ? 'chinacdc:/' + uploadForwardFile : '';
+      PlanRequest.Inputs['loaddata_node1'].data[0].name = uploadReverseFile.name ? 'chinacdc:/' + uploadForwardFile.name : '';
       PlanRequest.Inputs['loaddata_node2'].data[0].enid = uploadForwardFile.enid;
       PlanRequest.Inputs['loaddata_node2'].data[0].name = 'chinacdc:/' + uploadForwardFile.name;
 
