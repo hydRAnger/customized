@@ -48,7 +48,7 @@ $('#cdc_running').click(function() {
       PlanRequest.description = taskName;
       // update Inputs object
       PlanRequest.Inputs['loaddata_node1'].data[0].enid = uploadReverseFile.enid || '';
-      PlanRequest.Inputs['loaddata_node1'].data[0].name = uploadReverseFile.name ? 'chinacdc:/' + uploadForwardFile.name : '';
+      PlanRequest.Inputs['loaddata_node1'].data[0].name = uploadReverseFile.name ? 'chinacdc:/' + uploadReverseFile.name : '';
       PlanRequest.Inputs['loaddata_node2'].data[0].enid = uploadForwardFile.enid;
       PlanRequest.Inputs['loaddata_node2'].data[0].name = 'chinacdc:/' + uploadForwardFile.name;
 
@@ -266,7 +266,7 @@ function reverseUploadFile(reverseFastaForm) {
     //判断类型
     if (cdc_fileName.lastIndexOf(".") != -1) {
       var cdc_fileType = (cdc_fileName.substring(cdc_fileName.lastIndexOf(".") + 1, cdc_fileName.length)).toLowerCase();
-      var cdc_fileFormat = ["fasta", "fasta", "sam", "bam", "sff"];
+      var cdc_fileFormat = ["fq", "fastq"];
       for (var i = 0; i < cdc_fileFormat.length; i++) {
         if (cdc_fileFormat[i] == cdc_fileType) {
           $('#upload_reverse_p').empty();
