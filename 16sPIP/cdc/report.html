@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>ANI</title>
+  <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style type="text/css">
+    .cdc_icdc_top {
+      width: 90%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="loading_bg"></div>
+  <div id="loading">
+    <img src="img/loading.gif" id="loading_gif">
+    <p>loading...</p>
+  </div>
+  <nav>
+    <div class="cdc_icdc">
+      <div class="cdc_icdc_top">
+        <a href="/">
+          <div class="cdc_icdc_top_logo">
+          </div>
+        </a>
+        <div class="cdc_logo_font">
+          <span>微生物基因组遗传差异分析平台</span>
+          <p>ICDC,China CDC</p>
+        </div>
+        <div class="cdc_back">
+          <a href="/">Home</a>
+          <a id="parameter_display">Parameters</a>
+          <a id="log_display">Logs</a>
+          <a id="report_display">Report</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <section class="cdc_report_main">
+    <div id="cdc_report">
+    </div>
+  </section>
+  <!-- script -->
+  <script src="lib/jquery/dist/jquery.min.js" charset="utf-8"></script>
+  <script src="lib/bootstrap/dist/js/bootstrap.min.js" charset="utf-8"></script>
+  <script src="lib/jquery-form/jquery.form.js" charset="utf-8"></script>
+  <script type="text/javascript" src="js/genedock-sdk.js"></script>
+  <script type="text/javascript" src="js/genedock-cdc.js"></script>
+  <script type="text/javascript">
+    var urlHref = window.location.href.split("?")[1];
+    urlHref = urlHref.substr(0, urlHref.indexOf('/'))
+    Workflow_id = taskId = urlHref;
+
+    get_cdc_report(taskId, function(res) {
+      $("#cdc_report").append(res);
+      report_style_click();
+    });
+    taskstatus(taskId);
+  </script>
+</body>
+
+</html>

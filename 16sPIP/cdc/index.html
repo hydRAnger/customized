@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>16sPIP</title>
+  <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <nav>
+    <div class="cdc_icdc">
+      <div class="cdc_icdc_top">
+        <a href="/">
+          <div class="cdc_icdc_top_logo">
+          </div>
+        </a>
+        <div class="cdc_logo_font">
+          <span>微生物基因组遗传差异分析平台</span>
+          <p>ICDC,China CDC</p>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <section class="cdc_main">
+    <div class="cdc_left">
+      <h4>
+        Description
+      </h4>
+      <p>
+      16sPIP is an integrative application that consists of a series of Perl, Python, and shell scripts that can be run in a Linux/Unix system. If you want to quickly detect pathogens in clinical samples based on 16S metagenomic sequencing, you could download and run this program directly. Or you could send us the raw data by email. Then we will do the analysis work for you. But this software and results could not be allowed to be used in any commercial work.
+      </p>
+      <h4>
+        Downloads
+      </h4>
+      <p>Download the latest version of the program <a href="https://github.com/jjmiao1314/16sPIP.git">here</a>.</p>
+      <h4>
+        Manual
+      </h4>
+      <p>
+        The most current Linux version of the manual is available <a href="/docs/Manual-16sPIP.pdf">here</a>.
+      </p>
+      <h4>
+        Citation
+      </h4>
+      <p>
+        If you use the 16sPIP, please cite the following papers:
+        <br>
+        16sPIP: A Comprehensive Analysis Pipeline for Rapid Pathogen Detection in Clinical Samples Based on 16S Metagenomic Sequencing. BMC Bioinformatics, 2017
+      </p>
+      <h4>
+        FAQ
+      </h4>
+      <p>
+        Q: Could I use this program under Windows system? 
+        <br>
+        A: No. This version of 16sPIP only works under Linux/Unix system.
+      </p>
+      <p>
+        Q: How many kinds of bacteria are currently covered by the database?
+        <br>
+        A: 252,567 reads were used as the 16S full-length bacterial reference database in 16sPIP, covering 15,217 species and 2,094 genera. 16S pathogen database was constructed from 29,258 total reads covering 346 bacterial species of human health concern in “The Directory of Pathogenic Microorganisms in Human Infections” published by the Ministry of Health of the People’s Republic of China.
+      </p>
+      <p>
+        Q: The pipeline provides two different working modes. How to choose an appropriate one when handing a sample?
+        <br>
+        A: Users could choose the fast mode of 16SPIP to quickly identify the existence of 346 pathogen bacterial species in their samples, which are directly related with human health. If users want to identity the existence of other species as well as to study the population diversity of microbiome, the sensitive mode is the better choice.
+      </p>
+    </div>
+    <div class="cdc_right">
+      <h4>16sPIP Online <a class="ani-help-btn" href="/docs/Manual-16sPIP.pdf"><span class="glyphicon glyphicon-question-sign"></span> Help</a></h4>
+      <div class="form-horizontal">
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Your E-mail：</label>
+          <div class="col-sm-9 col-xs-4">
+            <input type="email" class="form-control" placeholder="Please enter the email..." aria-describedby="sizing-addon2">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">forward Fasta：</label>
+          <div class="col-sm-8 col-xs-4">
+            <div class="upload_panel">
+              <form role="form" id="forwardFastaForm" method="POST" onsubmit="return forwardFastaForm();" enctype="multipart/form-data">
+                <!--input type="text" value="" id="cdc_filetoken_input" name="cdc_filetoken_input" style="display:none"-->
+                <input type="file" id="inputForwardFile" name="inputForwardFile" style="display:none" onchange="forwardUploadFile(this)" />
+                <input type="text" readonly="readonly" value="" id="forwardFileAgent" class="inputFileAgent form-control" />
+                <input type="button" class="btn btn-default" onclick="document.getElementById('inputForwardFile').click()" value="Browse..." />
+                <button type="submit" class="btn btn-default" id="upload_forward_btn">Upload</button>
+                <p class="help-block">（File size can not exceed 100MB）</p>
+                <p id="upload_forward_p"></p>
+              </form>
+            </div>
+          </div>
+          <div class="col-sm-1 icdc_question">
+            <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="Query Formard File"></span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">reverse Fasta：</label>
+          <div class="col-sm-8 col-xs-4">
+            <div class="upload_panel">
+              <form role="form" id="reverseFastaForm" method="POST" onsubmit="return reverseFastaForm();" enctype="multipart/form-data">
+                <input type="text" value="" id="cdc_filetoken_input" name="cdc_filetoken_input" style="display:none">
+                <input type="file" id="inputReverseFile" name="inputReverseFile" style="display:none" onchange="reverseUploadFile(this)" />
+                <input type="text" readonly="readonly" value="" id="reverseFileAgent" class="inputFileAgent form-control" />
+                <input type="button" class="btn btn-default" onclick="document.getElementById('inputReverseFile').click()" value="Browse..." />
+                <button type="submit" class="btn btn-default" id="upload_reverse_btn">Upload</button>
+                <p class="help-block">（File size can not exceed 100MB）</p>
+                <p id="upload_reverse_p"></p>
+              </form>
+            </div>
+          </div>
+          <div class="col-sm-1 icdc_question">
+            <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="Query Reverse File"></span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Mode：</label>
+          <div class="col-sm-8 col-xs-4" style="padding-top: 7px;">
+            <input type="radio" id="modeFast" name="mode" value="fast" checked>
+            <label for="modeFast" style="margin-right: 50px">fast</label>
+            <input type="radio" id="modeSensitive" name="mode" value="sensitive">
+            <label for="modeSensitive">sensitive</label>
+          </div>
+          <div class="col-sm-1 icdc_question">
+            <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="Analysis mode：fast or sensitive"></span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label">Format：</label>
+          <div class="col-sm-8 col-xs-4">
+            <select id="select_format" class="genus form-control">
+              <option value="fastq">fastq</option>
+              <option value="fasta">fasta</option>
+              <option value="sam">sam</option>
+              <option value="bam">bam</option>
+              <option value="sff">sff</option>
+            </select>
+          </div>
+          <div class="col-sm-1 icdc_question">
+            <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="top" title="NGS data format : fastq or fasta or sam or bam or sff"></span>
+          </div>
+        </div>
+      </div>
+      <div class="cdc_running_div">
+        <table>
+          <tr>
+            <td style="padding-right:10px;">
+              <button type="button" class="btn cdc_running btn-primary" id="cdc_running" data-loading-text="Running...">RUN 16sPIP</button>
+            </td>
+            <td>
+              <button type="button" class="btn btn-link" id="cdc_testRun">Test Run 16sPIP</button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="cdc_right_buttom">
+        Powered by
+        <a href="https://genedock.com">
+          <span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+  <!-- script -->
+  <script src="lib/jquery/dist/jquery.min.js" charset="utf-8"></script>
+  <script src="lib/bootstrap/dist/js/bootstrap.min.js" charset="utf-8"></script>
+  <script src="lib/jquery-form/jquery.form.js" charset="utf-8"></script>
+  <script src="prd/bundle.js"></script>
+  <script type="text/javascript" src="js/genedock-sdk.js"></script>
+  <script type="text/javascript" src="js/genedock-utils.js"></script>
+  <script type="text/javascript" src="js/genedock-cdc.js"></script>
+  <script>
+    $(function() {
+      $('[data-toggle="tooltip"]').tooltip();
+      $('#cdc_running,#upload_forward_btn,#upload_reverse_btn').attr('disabled', 'disabled');
+    });
+  </script>
+</body>
+
+</html>
