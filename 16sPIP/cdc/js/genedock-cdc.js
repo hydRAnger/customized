@@ -125,10 +125,10 @@ $('#cdc_testRun').click(function() {
     PlanRequest.name = name;
     PlanRequest.description = taskName;
     // update Inputs object
-    PlanRequest.Inputs['loaddata_node1'].data[0].enid = '';
-    PlanRequest.Inputs['loaddata_node1'].data[0].name = '';
-    PlanRequest.Inputs['loaddata_node2'].data[0].enid = '58e73617f1e3f40055f3458c';
-    PlanRequest.Inputs['loaddata_node2'].data[0].name = 'chinacdc:/home/miaotest/SRR059126.fastq';
+    PlanRequest.Inputs['loaddata_node1'].data[0].enid = '59a7ca09f1e3f4002fd3eb55';
+    PlanRequest.Inputs['loaddata_node1'].data[0].name = 'chinacdc:/16SPIP/reverse_R2.fastq';
+    PlanRequest.Inputs['loaddata_node2'].data[0].enid = '59a7c9f8f1e3f4002fd3eb52';
+    PlanRequest.Inputs['loaddata_node2'].data[0].name = 'chinacdc:/16SPIP/forward_R1.fastq';
     // update Outputs object
     $.each(PlanRequest.Outputs, function(outputKey, outputVal) {
       for (var i = 0; i < PlanRequest.Outputs[outputKey].data.length; i++) {
@@ -168,7 +168,9 @@ $('#cdc_testRun').click(function() {
     PlanRequest.Property.reference_task[0].id = null;
 
     testbtn = true;
-    $('#forwardFileAgent').val('chinacdc:/home/miaotest/SRR059126.fastq');
+
+    $('#reverseFileAgent').val('chinacdc:/16SPIP/reverse_R2.fastq');
+    $('#forwardFileAgent').val('chinacdc:/16SPIP/forward_R1.fastq');
     $('#modeFast').prop("checked", true);
     $('#select_format').val("fastq");
 
