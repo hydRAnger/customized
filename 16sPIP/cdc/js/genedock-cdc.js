@@ -234,11 +234,11 @@ function forwardUploadFile(forwardFastaForm) {
         }
       }
       $("#cdc_running,#upload_forward_btn").attr("disabled", "disabled");
-      uploadForwardP(red, "Don't support the suffix for ." + cdc_fileType + " File upload,Only support (.fasta, .fa)");
+      uploadForwardP(red, "Don't support the suffix for ." + cdc_fileType + " File upload,Only support (.fastq, .fq, .fasta, .sam, .bam, .sff)");
       return false;
     } else {
       $("#cdc_running,#upload_forward_btn").attr("disabled", "disabled");
-      uploadForwardP(red, "Don't support the suffix for ." + cdc_fileType + " File upload,Only support (.fasta, .fa)");
+      uploadForwardP(red, "Don't support the suffix for ." + cdc_fileType + " File upload,Only support (.fastq, .fq, .fasta, .sam, .bam, .sff)");
     }
   }
 }
@@ -281,11 +281,11 @@ function reverseUploadFile(reverseFastaForm) {
         }
       }
       $("#upload_reverse_btn").attr("disabled", "disabled");
-      uploadReverseP(red, "Don't support the suffix for ." + cdc_fileType + " File upload,Only support (.fasta, .fa)");
+      uploadForwardP(red, "Don't support the suffix for ." + cdc_fileType + " File upload,Only support (.fastq, .fq)");
       return false;
     } else {
       $("#upload_reverse_btn").attr("disabled", "disabled");
-      uploadReverseP(red, "Don't support the suffix for ." + cdc_fileType + " File upload,Only support (.fasta, .fa)");
+      uploadForwardP(red, "Don't support the suffix for ." + cdc_fileType + " File upload,Only support (.fastq, .fq)");
     }
   }
 }
