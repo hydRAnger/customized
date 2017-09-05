@@ -221,7 +221,7 @@ function forwardUploadFile(forwardFastaForm) {
     //判断类型
     if (cdc_fileName.lastIndexOf(".") != -1) {
       var cdc_fileType = (cdc_fileName.substring(cdc_fileName.lastIndexOf(".") + 1, cdc_fileName.length)).toLowerCase();
-      var cdc_fileFormat = ["fasta", "fasta", "sam", "bam", "sff"];
+      var cdc_fileFormat = ["fastq", "fq", "fasta", "sam", "bam", "sff"];
       for (var i = 0; i < cdc_fileFormat.length; i++) {
         if (cdc_fileFormat[i] == cdc_fileType) {
           $('#upload_forward_p').empty();
