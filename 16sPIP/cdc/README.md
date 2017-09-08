@@ -21,3 +21,5 @@
 <b>不要尝试运行npm run build重新build项目！</b> 
 
 请使用已经构建并加入版本库的prd/bundle.js（我知道这很蛋疼…）
+
+在本机开发请使用npm run build
